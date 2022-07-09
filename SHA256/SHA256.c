@@ -195,7 +195,7 @@ void SHARED_LIB SHA256_Transform(sha256_ctx *ctx, const void *input, u64 size)
 		// now we can easily compute next vars cauze (BLOCK_SIZE - i) is size taken from input to complete block
 		block_nb = (size - (BLOCK_SIZE - i)) >> 6;
 		extraBytes = (size - (BLOCK_SIZE - i)) & (BLOCK_SIZE - 1);
-		inpw = (const u32*)(((const u8 *)input) + (BLOCK_SIZE - i));
+		inpw = (const u32 *)(((const u8 *)input) + (BLOCK_SIZE - i));
 		// copy from actual input
 		for (; i < BLOCK_SIZE; i++)
 		{
@@ -239,6 +239,14 @@ void SHARED_LIB SHA256_Finalize(sha256_ctx *ctx, void *output)
 	FinalizeCore(ctx->hash, ctx->buffer, ctx->buffer_size, ctx->total_size << 3, w);
 	CopyFinalHashCore(ctx->hash, output);
 }
+void SHARED_LIB SHA256_Clone(const sha256_ctx *__restrict source, sha256_ctx *__restrict destination)
+{
+	for (uiter i = 0; i < sizeof(sha256_ctx) / WORD_SIZE; i++)
+	{
+		PUT32(destination, i, GET32(source, i));
+	}
+}
+
 void SHARED_LIB SHA256_GenerateHash(const void *input, void *output, u64 size)
 {
 	// vars

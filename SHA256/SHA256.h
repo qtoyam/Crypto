@@ -17,7 +17,9 @@ void SHARED_LIB SHA256_CreateHandle(sha256_ctx **ctx);
 void SHARED_LIB SHA256_DestroyHandle(sha256_ctx *ctx);
 void SHARED_LIB SHA256_Initialize(sha256_ctx *ctx);
 void SHARED_LIB SHA256_Transform(sha256_ctx *ctx, const void *input, u64 size);
-void SHARED_LIB SHA256_Finalize(sha256_ctx *ctx, void* output);
+void SHARED_LIB SHA256_Finalize(sha256_ctx *ctx, void *output);
+void SHARED_LIB SHA256_Clone(const sha256_ctx *__restrict source, sha256_ctx *__restrict destination);
+
 void SHARED_LIB SHA256_GenerateHash(const void *input, void *output, u64 size);
 
 #endif //__SHA256__
