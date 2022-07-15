@@ -33,6 +33,11 @@ void SHARED_LIB AES_AddIV0(void *handle, u64 value)
 	u64 oldValue = GET64(handle, 0);
 	PUT64(handle, 0, value + oldValue);
 }
+void SHARED_LIB AES_SubtractIV0(void *handle, u64 value)
+{
+	u64 oldValue = GET64(handle, 0);
+	PUT64(handle, 0, oldValue - value);
+}
 void SHARED_LIB AES_Clone(const void *__restrict source, void *__restrict destination)
 {
 	for (uiter i = 0; i < AES_HANDLE_SIZEW; i++)
