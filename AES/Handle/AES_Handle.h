@@ -7,4 +7,6 @@ void SHARED_LIB AES_CreateHandle(void **handle);
 void SHARED_LIB AES_SetIV(void *handle, const void *iv);
 void SHARED_LIB AES_DestroyHandle(void *handle);
 
+void SHARED_LIB AES_Clone(const void* __restrict source, void* __restrict destination);
+
 #endif //__AES_Handle__

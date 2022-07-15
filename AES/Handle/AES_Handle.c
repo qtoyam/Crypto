@@ -27,3 +27,11 @@ void SHARED_LIB AES_DestroyHandle(void *handle)
 	CLEAR_MEMW(handle, AES_HANDLE_SIZEW);
 	_aligned_free(handle);
 }
+
+void SHARED_LIB AES_Clone(const void *__restrict source, void *__restrict destination)
+{
+	for (uiter i = 0; i < AES_HANDLE_SIZEW; i++)
+	{
+		PUT32(destination, i, GET32(source, i));
+	}
+}
