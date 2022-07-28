@@ -23,9 +23,14 @@ void SHARED_LIB AES_SetIV(void *__restrict handle, const void *__restrict iv)
 }
 void SHARED_LIB AES_DestroyHandle(void *handle)
 {
+	AES_ClearKeyIV(handle);
+	_aligned_free(handle);
+}
+
+void SHARED_LIB AES_ClearKeyIV(void *handle)
+{
 	handle = ASSUME_ALIGNED(handle, AES_HANDLE_ALIGN);
 	CLEAR_MEMW(handle, AES_HANDLE_SIZEW);
-	_aligned_free(handle);
 }
 
 void SHARED_LIB AES_AddIV0(void *handle, u64 value)
